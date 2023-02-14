@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+		           http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Maven version of the xml document.
+    Currently only 4.0.0 is valid -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Maven projects are identified by their GAV. The groupId (G) is first, 
+    the artifactId (A) is second, and the version (V) is third. The groupId is 
+    usually a company's domain name reversed. If you do not have a domain then 
+    just use your name as I have (I do own kenfogel.com) -->
+    <groupId>com.kenfogel</groupId>
+
+    <!-- This is the name given to the packaged build -->
+    <artifactId>streamsexample</artifactId>
+
+    <!-- The version of the build. Any value is valid though a number and a
+    string are common. SNAPSHOT means a project under development. FINAL or no
+    text is commonly used to refer to a stable production version -->
+    <version>0.1-SNAPSHOT</version>
+
+    <!-- Values can be:
+    jar - java archive
+    war - web archive
+    ear - enterprise archive -->
+    <packaging>jar</packaging>
+
+    <!-- Name of the project in the repository -->
+    <name>StreamsExample</name>
+
+    <!-- A description of the program -->
+    <description>Example of streams</description>
+
+    <!-- Identifies the programmer or programmers who worked on the project -->
+    <developers>
+        <developer>
+            <id></id>
+            <name></name>
+            <email></email>
+        </developer>
+    </developers>
+
+    <!-- The company or organization that the programmer(s) work for -->
+    <organization>
+        <name></name>
+    </organization>
+
+    <!-- properties are values that plugins can use by refering to the tag name. 
+    For example, the value in java.version, 17, is refered to as ${java.version} -->
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <exec.mainClass>com.kenfogel.streamsexample.StreamsExample</exec.mainClass>
+    </properties>
+
+    <!-- Here we list the plugin libraries that Maven may use to build the 
+    project. These are not added to your program but only used by Maven. -->
+    <build>
+        <!-- Maven must be told what you expect it to do and these are called goals. 
+        'clean' deletes the target folder forcing all code to be compiled. 
+        'compile' goes through the source code tree and compiles every source 
+                    code file and writes the bytecode to the target folder.
+        'test' runs all unit tests that are in the project 
+        'package' combines all the files into a jar package.
+        'exec:java' will execute your program in the same JVM that Maven is running in.
+        'exec:exec" will execute your program is a new JVM. -->
+        <defaultGoal>clean package exec:java</defaultGoal>
+
+        <plugins>
+            <plugin>
+                <!-- Deletes the files in the target folder so that all files 
+                will be compiled and not just those that changed since the 
+                last compile. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+            <plugin>
+                <!-- Copies non source code files from the project's 
+                resource folder to the target folder -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+            <plugin>
+                <!-- Invokes the Java compiler -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+            </plugin>
+            <plugin>
+                <!-- Runs unit tests if they exist -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+            <plugin>
+                <!-- This plugin packages all the bytecode and resource 
+                files into a jar file. The manifest tag adds a META-INF folder 
+                to the jar with a MANIFEST.MF file. This files lists the class 
+                with the main method and this allows the final jar file to 
+                be executable. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>	
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- The Java class that contains 
+                            the main method -->
+                            <mainClass>${exec.mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- Enables Maven to run the program as long as any 
+                previous goals, such as compile or test, were all successful -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
