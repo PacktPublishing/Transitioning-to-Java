@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuration: Parent element of a log4j2.xml file
+status= refers to the level of messages emitted by log4j2
+about itself-->
+<Configuration status="WARN">
+
+    <!-- Properties: Create variables in the format ${name]
+    for use later in the file -->
+    <Properties>
+        <Property name="log-path">log</Property>
+    </Properties>
+
+    <!-- Appenders: Defines the destination of log data
+    and the format it will appear as -->
+    <Appenders>
+        <!-- Output to the console -->
+        <Console name="console-log" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+        </Console>
+
+        <!-- Output to a file. append=true each run appends its
+        output to the same file while false overwites the file -->
+        <File name="file-log" fileName="${log-path}/loggingdemo-log4j2.log" append="true" >
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+
+    <!-- Loggers use the appenders to write logs. Root is
+    the pre-defined logger. Here is where you can define
+    the level of message you wish to log -->
+    <Loggers>
+        <Root level="trace">
+            <appender-ref ref="file-log" />
+            <appender-ref ref="console-log" />
+        </Root>
+    </Loggers>
+
+</Configuration>
