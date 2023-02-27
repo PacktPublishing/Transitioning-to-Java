@@ -97,7 +97,7 @@
              the war file. Package will invoke compile and test before creating 
              the final war file.
         -->
-        <defaultGoal>verify package</defaultGoal>
+        <defaultGoal>clean package</defaultGoal>
          
         <!-- Plugins are components that Maven uses for specific purposes beyond
              the basic tasks 
