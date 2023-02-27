@@ -1,0 +1,16 @@
+<!-- 
+Required configuration file for JSF. The most common config is to associate the 
+message bundle file with Faces.
+-->
+<faces-config version="4.0"
+              xmlns="https://jakarta.ee/xml/ns/jakartaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_4_0.xsd">
+
+    <application>
+        <resource-bundle>
+            <base-name>com.kenfogel.bundles.MessagesBundle</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+    </application>
+</faces-config>
