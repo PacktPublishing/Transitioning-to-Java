@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+		           http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Maven version of the xml document.
+    Currently only 4.0.0 is valid -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Maven projects are identified by their GAV. The groupId (G) is first, 
+    the artifactId (A) is second, and the version (V) is third. The groupId is 
+    usually a company's domain name reversed. If you do not have a domain then 
+    just use your name as I have (I do own kenfogel.com) -->
+    <groupId>com.kenfogel</groupId>
+
+    <!-- This is the name given to the packaged build -->
+    <artifactId>virtualthreadtest</artifactId>
+
+    <!-- The version of the build. Any value is valid though a number and a
+    string are common. SNAPSHOT means a project under development. FINAL or no
+    text is commonly used to refer to a stable production version -->
+    <version>0.1-SNAPSHOT</version>
+
+    <!-- Values can be:
+    jar - java archive
+    war - web archive
+    ear - enterprise archive -->
+    <packaging>jar</packaging>
+
+    <!-- Name of the project in the repository -->
+    <name>VirtualThreadTest</name>
+
+    <!-- A description of the program -->
+    <description>Example of virtual threading</description>
+
+    <!-- Identifies the programmer or programmers who worked on the project -->
+    <developers>
+        <developer>
+            <id></id>
+            <name></name>
+            <email></email>
+        </developer>
+    </developers>
+
+    <!-- The company or organization that the programmer(s) work for -->
+    <organization>
+        <name></name>
+    </organization>
+
+    <!-- properties are values that plugins can use by refering to the tag name. 
+    For example, the value in java.version, 19, is refered to as ${java.version} -->
+    <properties>
+        <java.version>19</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <exec.mainClass>com.kenfogel.virtualthreadtest.VirtualThreadRunnableInterfaceRunner</exec.mainClass>
+    </properties>
+
+    <!-- Here we list the plugin libraries that Maven may use to build the 
+    project. These are not added to your program but only used by Maven. -->
+    <build>
+        <defaultGoal>clean compile package exec:exec</defaultGoal>
+        <plugins>
+            <plugin>
+                <!-- Enables Maven to run the program as long as any 
+                previous goals, such as compile or test, were all successful -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                     
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-cp</argument>  
+                        <argument>${project.build.directory}/classes</argument>  
+                        <argument>--enable-preview</argument>  
+                        <argument>${exec.mainClass}</argument>
+                    </arguments>
+                </configuration>       
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <release>${java.version}</release>
+                    <enablePreview>true</enablePreview>
+                    <compilerArgs>
+                        <arg>--enable-preview</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+

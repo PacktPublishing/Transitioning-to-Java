@@ -1,0 +1,128 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- pom.xml Feb 3, 2023, version 1.3-->
+
+    <!-- This is the Project Object Model known as the pom.xml file. It provides 
+         all the configuration for a single project. In my courses I usually 
+         distribute a parent pom file with the basic configuration that my 
+         students include in their local pom files where they add 
+         additional components based on their work. Later examples in this series
+         will use this technique. The pom file is complete
+    -->
+
+    <!-- Maven version of the xml document currently only 4.0.0 is valid -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- The GAV, groupId, artifactId, and version consists of an arbitrary 
+         descriptor that is usually in the form of a reverse domain name. 
+    -->
+    <groupId>com.kfwebstandard</groupId>
+
+    <!-- This is the name given to the packaged build -->
+    <artifactId>basicservlet</artifactId>
+
+    <!-- The version of the build. Any value is valid though a number and a
+         string are common. SNAPSHOT means a project under development. FINAL 
+         is commonly used to refer to stable production version 
+    -->
+    <version>0.1-SNAPSHOT</version>
+
+    <!-- Default value is jar but may be war or ear -->
+    <packaging>war</packaging>
+
+    <!-- The name given to the project. Unlike groupId and artifactId a name
+         may have spaces 
+    -->
+    <name>BasicServlet</name>
+
+    <!-- A description of the program -->
+    <description>An example servlet</description>
+
+    <!-- Identifies the programmer or programmers who worked on the project -->
+    <developers>
+        <developer>
+            <id>Enter your school or company id</id>
+            <name>Enter your name</name>
+            <email>Enter your email address</email>
+        </developer>
+    </developers>
+
+    <!-- The company or organization that the programmer(s) work for -->
+    <organization>
+        <name>Enter school or company name</name>
+    </organization>
+
+    <!-- Global settings/variables for the project used in the pom or by plugins.
+         Settings can be accessed in the pom by placing the tag name in ${...}  
+    -->
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <jakartaee>10.0.0</jakartaee>
+    </properties>
+
+    <!-- Dependencies are libraries that either must be included in the war file
+         or are expected to be found on the application server or container when
+         the <scope> is provided
+    -->
+    <dependencies>
+        <!-- Jakarta EE dependency -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${jakartaee}</version>
+            <scope>provided</scope>
+        </dependency> 
+    </dependencies>
+    
+        <!-- Information on how the project will be built and what tools/plugins
+             are required beyond the standard ones that Maven uses.
+        -->
+    <build>
+        <!-- By default the war file will be named 
+             ${project.artifactId}-${project.version}
+             This allows you to assign an arbitrary name. I usually get rid of
+             the version.
+        -->      
+        <finalName>
+            ${project.artifactId} 
+        </finalName>
+
+        <!-- Goals may be set in the IDE or the pom. You can override the default
+             goals in your IDE or when running Maven (mvn) at the command line.
+             Here I am deleting all previous compiled code and war file with clean. 
+             Clean is rarely used as a goal as it can slow compiles of large 
+             projects when only a few files have been changed but in my courses 
+             I use it to ensure that all changes my students make are updated in 
+             the war file. Package will invoke compile and test before creating 
+             the final war file.
+        -->
+        <defaultGoal>clean package</defaultGoal>
+         
+        <!-- Plugins are components that Maven uses for specific purposes beyond
+             the basic tasks 
+        -->
+        <plugins>
+            <!-- Plugin to generate a war file. Technically not required but 
+                 default version used with Maven included in my IDE uses an 
+                 older version that generates warnings and I hate warnings. I 
+                 also dislike defaults I can't see. 
+            -->                                                           
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+
+
+
+

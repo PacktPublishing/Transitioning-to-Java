@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Maven version of the xml document currently only 4.0.0 is valid -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- The GAV consists of an arbitrary descriptor that is usually in the
+    form of a reverse domain name. -->
+    <groupId>com.kenfogel</groupId>
+
+    <!-- This is the name given to the packaged build -->
+    <artifactId>bankfx</artifactId>
+
+    <!-- The version of the build. Any value is valid though a number and a
+    string are common. SNAPSHOT means a project under development. FINAL or no
+    text is commonly used to refer to stable production version -->
+    <!-- Upgraded for Java 14 with preview features, OpenFX and running OpenFX apps -->
+    <version>0.1-SNAPSHOT</version>
+
+    <!-- Packaging to be a parent pom for other projects -->
+    <packaging>jar</packaging>
+
+    <!-- Name of the project in the repository -->
+    <name>BankFX</name>
+
+    <!-- A description of the program -->
+    <description>Banking program with JavaFX interface</description>
+
+    <!-- Identifies the programmer or programmers who worked on the project -->
+    <developers>
+        <developer>
+            <id></id>
+            <name></name>
+            <email></email>
+        </developer>
+    </developers>
+
+    <!-- The company or organization that the programmer(s) work for -->
+    <organization>
+        <name></name>
+    </organization>
+
+    <!-- Global settings for the project. Settings can be accessed in the pom
+    by placing the tag name in ${...} ex. ${mainClass} -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
+        <exec.mainClass>com.kenfogel.bankfx.FinanceCalculatorMain</exec.mainClass>
+        <skiptests>false</skiptests>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.19.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.19.0</version>
+        </dependency>
+
+        <!-- OpenFX Dependencies -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.2</version>
+        </dependency>
+        
+    </dependencies>
+
+    <build>
+        <!-- For JavaFX programs we use javafx:run rather than exec:java -->
+        <defaultGoal>verify javafx:run</defaultGoal>
+        
+        <plugins>
+            <!-- This plugin deletes the files in the target folder 
+            that will result in all files being compiled -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+            <!-- This plugin copies non source code files from the 
+            project's resource folder to the target folder -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.0</version>
+            </plugin>
+            
+            <!-- We need to explicitly define this plugin so that we can
+                enable preview features in a maven build and if needed use a 
+                more up to date version than the version that Maven will
+                use implicitly.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                    <compilerArgs>
+                        <args>--enable-preview</args>
+                    </compilerArgs>               
+                </configuration>
+            </plugin>
+            
+            <!-- This plugin is required to run JavaFX programs from Maven.
+                 It also works with non-FX programs.
+            -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <configuration>
+                            <mainClass>${exec.mainClass}</mainClass>
+                            <options>
+                                <option>--enable-preview</option> 
+                            </options>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>debug</id>
+                        <configuration>
+                            <options>
+                                <option>--enable-preview,-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</option>
+                            </options>
+                            <mainClass>${exec.mainClass}</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- Executes JUnit tests and writes the results as an xml and
+                 txt file. Test classes must include one of the following in 
+                 their name: Test* *Test *TestCase (* is just a wildcard, 
+                 replace with the test class name)
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+            
+        </plugins>
+    </build>
+</project>
+

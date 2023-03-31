@@ -1,0 +1,11 @@
+<!-- 
+Context Dependency Injection requires the presence of a
+beans.xml file. Previous versions of Faces preferred the mode to be 'all' while 
+the current best practice recommends 'annotated. This file acts as a switch to 
+turn on Bean Validation and CDI.
+-->
+<beans xmlns="https://jakarta.ee/xml/ns/jakartaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/beans_3_0.xsd"
+       bean-discovery-mode="annotated">
+</beans>

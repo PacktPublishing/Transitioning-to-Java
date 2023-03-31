@@ -1,0 +1,44 @@
+#prompt_label {
+    -fx-font-size:14pt;
+    -fx-font-weight:bold;
+    -fx-font-family:Verdana, sans-serif;
+}
+
+#input_field {
+    -fx-font-size:14pt;
+    -fx-font-weight:normal;
+    -fx-font-family:Verdana, sans-serif;
+}
+
+#title {
+    -fx-font-size:18pt;
+    -fx-font-weight:bold;
+    -fx-font-family:Verdana, sans-serif
+}
+
+.button {
+    -fx-font-family:Verdana, sans-serif;
+    -fx-font-weight:bold;
+    -fx-font-size:14pt;
+}
+
+.radio-button {
+    -fx-font-family:Verdana, sans-serif;
+    -fx-font-weight:bold;
+    -fx-font-size:14pt;
+}
+
+
+.alert.error.dialog-pane {
+    -fx-font-size:14pt;
+    -fx-font-weight:bold;
+    -fx-font-family:Verdana, sans-serif;
+
+}
+
+.alert.alert {
+    -fx-font-size:14pt;
+    -fx-font-weight:bold;
+    -fx-font-family:Verdana, sans-serif;
+    
+}

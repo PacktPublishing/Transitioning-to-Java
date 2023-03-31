@@ -1,0 +1,57 @@
+<!DOCTYPE xhtml>
+<html xmlns:faces="jakarta.faces"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:pt="jakarta.faces.passthrough" >
+
+    <h:head>
+        <title>#{msgs.title}</title>
+        <h:outputStylesheet library="css" name="main.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1>#{msgs.heading}</h1>
+
+            <h:selectOneRadio value="#{money.calculationType}" immediate="true" styleClass="radiocenter" >
+                <f:selectItem itemValue="loan" itemLabel="#{msgs.loan_radio}" styleclass="radiocenter"/>
+                <f:selectItem itemValue="savings" itemLabel="#{msgs.savings_radio}" styleclass="radiocenter"/>
+                <f:selectItem itemValue="goal" itemLabel="#{msgs.goal_radio}" styleclass="radiocenter" />
+                <f:ajax event="valueChange" render="@form" action="#{money.clear()}"/>
+            </h:selectOneRadio>
+
+            <h:panelGrid columns="2" >
+                <h:outputLabel value="&#160;"/>
+                <h:message id = "inputError" for="inputValue" style="white-space:nowrap; color:red; font-size: 100%;"/>
+                <h:outputLabel id = "inputLabel" value="#{money.getInputLabel()}" for="inputValue" />
+                <h:inputText value="#{money.inputValue}" id="inputValue" converterMessage="#{msgs.invalidInput}" >
+                    <f:ajax event="blur" render="inputError" />
+                </h:inputText>
+
+                <h:outputLabel value="&#160;"/>
+                <h:message id="interestError" for="interestValue"  style="white-space:nowrap; color:red; font-size: 100%; " />
+                <h:outputLabel value="#{msgs.interest}" for="interestValue"/>
+                <h:inputText value="#{money.rate}" id="interestValue"  converterMessage="#{msgs.invalidInput}" >
+                    <f:ajax event="blur" render="interestError" />
+                </h:inputText>
+
+                <h:outputLabel value="&#160;"/>
+                <h:message id="termError" for="termValue"  style="white-space:nowrap;  color:red; font-size: 100%;" />
+                <h:outputLabel value="#{msgs.term}" for="termValue" />
+                <h:inputText value="#{money.term}" id="termValue" converterMessage="#{msgs.invalidInput}" >
+                    <f:ajax event="blur" render="termError" />
+                </h:inputText>
+
+                <h:outputLabel value="&#160;"/>
+                <h:outputLabel value="&#160;"/>
+                <h:outputLabel value="#{msgs.result}" for="resultValue"/>
+                <h:inputText value="#{money.result}" readonly="true" id="resultValue"/>
+
+                <h:commandButton type="submit" action="#{calculate.performCalculation()}" value="#{msgs.submit}"  styleClass="btn" />
+                <h:commandButton type="reset" value="#{msgs.clear}" styleClass="btn2" >
+                    <f:ajax event="click" execute="@this" render="@form" />
+                </h:commandButton>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
