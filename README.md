@@ -62,3 +62,8 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 is a Research Scholar in Residence at Dawson College and a CS Instructor at Continuing Education Concordia University. He has been a Computer Science instructor for 31 years, 21 of those years as a Java instructor. To add on to that he is Java Champion, and also a Java Community Process Executive Committee member. He had been the Department Chairperson and Program Coordinator of the Computer Science Technology Program at Dawson College for 25 of his 31 years.
 He has overseen the evaluation of the Computer Science Technology Program and also help develop program revisions at Dawson College with a focus on the skill set students must possess to be productive from their first day as a working developer.
 He is an active conference organizer, first of DawsCon and now of the JChampions Conference.
+
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781804614013">https://packt.link/free-ebook/9781804614013 </a> </p>
