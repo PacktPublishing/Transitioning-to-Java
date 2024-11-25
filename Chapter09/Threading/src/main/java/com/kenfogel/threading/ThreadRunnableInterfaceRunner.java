@@ -16,7 +16,7 @@ public class ThreadRunnableInterfaceRunner {
              * constructor a reference to a Runnable thread and the thread name.
              * Now we can call start().
              */
-            new Thread(new ThreadRunnableInterface(), "" + ++i).start();
+            new Thread(new ThreadRunnableInterface(), "" + i).start();
         }
     }
 
